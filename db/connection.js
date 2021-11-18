@@ -1,22 +1,23 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
+const mysql = require("mysql2");
+const dotenv = require("dotenv");
 
 
 let connection = mysql.createConnection({
   host: "localhost",
-
   port: 3306,
-
   user: "root",
-
-  password: process.env.DB_PASWWORD,
+  password: "Mintman1!",
   database: "employees_db"
 });
 
 connection.connect(function(err) {
-  if (err) throw err;
-    console.log("connected as id " + connection.threadId + "\n");
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+  console.log('Connected to the Employee tracker.');
   runSearch();
 });
 
@@ -426,6 +427,6 @@ function runSearch() {
   }
 
   function endSession() {
-    console.log("Session ended. Thanks for using Employee Tracker CMS.");
+    console.log("Session ended. Thanks for using Employee Tracker.");
     connection.end();
   }
